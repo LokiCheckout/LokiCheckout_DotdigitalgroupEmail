@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+use Dotdigitalgroup\Email\Block\EmailCapture;
+use Magento\Framework\Escaper;
+
+/**
+ * @var EmailCapture $block
+ * @var Escaper $escaper
+ */
+
+$trackingEnabled = $block->isWebBehaviourTrackingEnabled();
+$emailCaptureEnabledForCheckout = $block->isEasyEmailCaptureEnabled();
+$emailCaptureType = $block->getData('email_capture_type');
+$emailCaptureUrl = $emailCaptureType === 'checkout' ?
+    $escaper->escapeUrl($block->getEmailCaptureUrl()) :
+    '';
+?>
+<?php if ($trackingEnabled || $emailCaptureEnabledForCheckout): ?>
+    <script>
+        (() => {
+            window.addEventListener('DOMContentLoaded', () => {
+                dotDigitalEmailCapture(
+                    '<?= /** @noEscape */ $emailCaptureType ?? '' ?>',
+                    '<?= /** @noEscape */ $emailCaptureUrl ?? '' ?>',
+                );
+            });
+        })();
+    </script>
+<?php endif; ?>
