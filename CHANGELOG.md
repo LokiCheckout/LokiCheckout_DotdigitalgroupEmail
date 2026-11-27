@@ -6,3 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1] - 27 November 2026
+### Added
+- Initial release: Dotdigital email capture and web behaviour tracking script in the Loki Checkout
+- Report this compatibility module and its version in the Dotdigital connector module listing
+
+### Removed
+- Drop PHP 8.1 support, add PHP 8.5 support
+
